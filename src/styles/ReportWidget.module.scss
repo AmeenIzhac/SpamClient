@@ -1,0 +1,30 @@
+p {
+  margin: 0;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  width: 48vw;
+  height: 16vh;
+  border: solid 1px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-template-rows: repeat(3, 1fr);
+  padding: 10px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+
+.linkMock {
+  text-decoration: underline;
+  color: #0000ff;
+}
