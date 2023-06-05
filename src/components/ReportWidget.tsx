@@ -8,23 +8,42 @@ interface types {
   type: string;
   state: string;
   message: string;
+  closeReport: (id: string) => void;
+  revokeReport: (id: string) => void;
 }
 
-function ReportWidget({ id, type, state, message }: types) {
-  function handleBlock(id: string) {
+function ReportWidget({
+  id,
+  type,
+  state,
+  message,
+  closeReport,
+  revokeReport,
+}: types): JSX.Element {
+  function handleBlock(id: string): void {
     axios
       .put(`${SERVER}/reports/${id}`, {
-        ticketState: "BLOCKED",
+        ticketState: "REVOKED",
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          revokeReport(id);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  function handleResolve(id: string) {
+  function handleResolve(id: string): void {
     axios
       .put(`${SERVER}/reports/${id}`, {
-        ticketState: "RESOLVED",
+        ticketState: "CLOSED",
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          closeReport(id);
+        }
       })
       .catch((error) => {
         console.log(error);
